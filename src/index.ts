@@ -1,3 +1,4 @@
 export { Indicators } from "./core/indicators"
 export { IndicatorsSync } from "./core/indicatorsSync"
-export * from "./core/indicatorsExtract"
+export { IndicatorsNormalized } from "./core/indicatorsNormalized"
+export { IndicatorsNormalizedSync } from "./core/indicatorsNormalizedSync"

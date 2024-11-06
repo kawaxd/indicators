@@ -1,6 +1,6 @@
 {
 	"name": "@ixjb94/indicators",
-	"version": "1.2.4",
+	"version": "1.2.2",
 	"description": "Fastest Technical Indicators written in typescript. More than +100 indicators(SMA, EMA, RSI, MACD, ...)",
 	"main": "dist/index.js",
 	"module": "src/index.ts",
@@ -15,7 +15,8 @@
 		"test:coverage": "jest --coverage",
 		"webpack": "npx webpack",
 		"pub": "tsc && npm run webpack && npm version patch && npm publish && git push origin master",
-		"tsc": "tsc"
+		"dev": "npm run build && npm run dist",
+		"ts": "tsc"
 	},
 	"repository": {
 		"type": "git",

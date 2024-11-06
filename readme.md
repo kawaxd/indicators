@@ -7,13 +7,8 @@
 
 ![logo](https://raw.githubusercontent.com/ixjb94/indicators/master/images/bar-graph.png "logo")
 
-### [Version Info](https://github.com/ixjb94/indicators/issues/19)
-
-### [A JavaScript Version](https://github.com/ixjb94/indicators-js/)
-There is also a newer version written in [JavaScript](https://github.com/ixjb94/indicators-js/).    
-
 ### Supports
-Browser, ES6, CommonJS, NodeJS, Bun, Svelte, React, Angular, etc.
+Browser, ES6, CommonJS
 
 ### About
 Fastest Technical Indicators written in TypeScript    
@@ -64,11 +59,9 @@ index.html example:
 		PLEASE NOTE: you probably just need one of these
 		- browser.js
 		- browser-indicators.js
+		- browser-indicatorsNormalized.js
 		- browser-indicators-sync.js
-		- browser-indicators-extract.js
-
-		or extracted versions like this:
-		- ./ema.js | ./sma.js | ./rsi.js
+		- browser-indicatorsNormalized-sync.js
 	-->
 
 	<!-- all versions -->
@@ -76,41 +69,20 @@ index.html example:
 
 	<!-- indicators -->
 	<script src="./node_modules/@ixjb94/indicators/dist/browser-indicators.js"></script>
-
-	<!-- extracted (not in a class) -->
-	<script src="./node_modules/@ixjb94/indicators/dist/browser-indicators-extract.js"></script>
 	
+	<!-- normalized indicators -->
+	<script src="./node_modules/@ixjb94/indicators/dist/browser-indicatorsNormalized.js"></script>
+
 	<!-- sync indicators -->
 	<script src="./node_modules/@ixjb94/indicators/dist/browser-indicators-sync.js"></script>
 
-	<!-- extracted indicators -->
-	<script src="./node_modules/@ixjb94/indicators/dist/core/extract/ema.js"></script>
-	<script src="./node_modules/@ixjb94/indicators/dist/core/extract/sma.js"></script>
-	<script src="./node_modules/@ixjb94/indicators/dist/core/extract/rsi.js"></script>
-	<!-- ... -->
-
-	<!-- how to use class based -->
+	<!-- sync normalized indocators -->
+	<script src="./node_modules/@ixjb94/indicators/dist/browser-indicatorsNormalized-sync.js"></script>
 	<script>
 		const library = indicators
 		const ta = new library.Indicators()
 
 		ta.ema(close, 20).then(data => console.log(data))
-	</script>
-
-	<!-- how to use extracted versions -->
-    <script>
-        const close = [1, 2, 3, 4, 5, 6]
-        ema(close, 3).then(result => {
-            console.log(result)
-            // output: [1, 1.5, 2.25, 3.125, 4.0625, 5.03125]
-        })
-    </script>
-
-	<!-- how to use extracted version (browser-indicators-extract.js) -->
-	<script src="./node_modules/@ixjb94/indicators/dist/browser-indicators-extract.js"></script>
-	<script>
-		const { ema, sma } = indicators
-		ema([1,2,3,4,5,6], 3).then(d => console.log(d))
 	</script>
 </body>
 </html>
@@ -122,24 +94,31 @@ OR you can use unpkg:
 ```
 https://unpkg.com/@ixjb94/indicators@latest/dist/browser.js
 https://unpkg.com/@ixjb94/indicators@latest/dist/browser-indicators.js
+https://unpkg.com/@ixjb94/indicators@latest/dist/browser-indicatorsNormalized.js
 https://unpkg.com/@ixjb94/indicators@latest/dist/browser-indicators-sync.js
-https://unpkg.com/@ixjb94/indicators@latest/dist/browser-indicators-extract.js
-
-OR
-https://unpkg.com/@ixjb94/indicators@latest/dist/core/extract/ema.js
-https://unpkg.com/@ixjb94/indicators@latest/dist/core/extract/sma.js
-https://unpkg.com/@ixjb94/indicators@latest/dist/core/extract/rsi.js
-// ... and others
-
-see the full list:
-https://unpkg.com/browse/@ixjb94/indicators@1.2.3/dist/core/extract/
+https://unpkg.com/@ixjb94/indicators@latest/dist/browser-indicatorsNormalized-sync.js
 ```
 
 ### Indicators Consists Of
 Indicators consists of these classes:    
 1- Indicators: `new Indicators()`    
-2- IndicatorsSync: `new IndicatorsSync()`    
-3- Or you can use then directly without using classes    
+2- IndicatorsNormalized: `new IndicatorsNormalized()`    
+3- IndicatorsSync: `new IndicatorsSync()`    
+4- IndicatorsNormalizedSync: `new IndicatorsNormalizedSync()`    
+
+Q: What is the difference between `Indicators` and `IndicatorsNormalized`?    
+A: `IndicatorsNormalized` will fill the gap for you, example (SMA 3 with 5 closes):
+```
+[NaN, NaN, 1, 2, 3]
+```
+
+But the `Indicators` will give you the SMA3 with 5 closes like this:    
+```
+[1, 2, 3]
+```
+
+Note: Please note that the performance between `IndicatorsNormalized` and `Indicators` are the same,    
+so it's better to use `IndicatorsNormalized`.
 
 ### Examples
 **Note: Everything is`Promised`  so you need to do  `.then`  or  `await`**    
@@ -181,7 +160,7 @@ node-talib, tulipnode, technicalindicators, pandas_ta
 | cmo             | Chande Momentum Oscillator            | ✅                  |
 | crossany        | Crossany                              | ✅                  |
 | crossover       | Crossover                             | ✅                  |
-| crossunder      | Crossunder                            | ✅                  |
+| crossover       | Crossover                             | ✅                  |
 | crossOverNumber | Crossover a number                    | ✅                  |
 | crossUnderNumber| Crossunder a number                   | ✅                  |
 | cvi             | Chaikins Volatility                   | ✅                  |
